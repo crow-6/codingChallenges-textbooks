@@ -1,6 +1,7 @@
 /*
 + Crow Practice Project
-+ idea: bees
++ idea: bees 
+(later note: i lied, bugs)
 	- different sizes of bees with different abilities
 	- oregon trail style
 	- 4 bees
