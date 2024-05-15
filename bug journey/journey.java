@@ -22,13 +22,19 @@ import java.util.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.geometry.Insets;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.scene.text.Text;
+import javafx.scene.text.Font;
 
 /*layout plan: 4 bugs along bottom with vector sprites, constant*/
 
@@ -44,10 +50,10 @@ public class journey extends Application{
 		
 		//original pngs will be 405x405
 		
-		Image worm = new Image("file:worm.png");
-		Image caterpillar = new Image("file:caterpillar.png");
-		Image ant = new Image("file:ant.png");
-		Image bee = new Image("file:bee.png");
+		Image worm = new Image("file:files\\worm.png");
+		Image caterpillar = new Image("file:files\\caterpillar.png");
+		Image ant = new Image("file:files\\ant.png");
+		Image bee = new Image("file:files\\bee.png");
 		
 		ImageView viewWorm = new ImageView(worm);
 		ImageView viewCaterpillar = new ImageView(caterpillar);
@@ -81,14 +87,33 @@ public class journey extends Application{
 		left off plan (5:09am):
 			x - make other vectors
 			x - align hbox bottom center with padding
-			- start on bug credentials
+			x - start on bug credentials
 				idea: have doc with abilities that reads
 		*/
 		
+		//use borderpane for layout
+		BorderPane borderPane = new BorderPane();
+		
 		HBox bugs = new HBox(10, wormPhoto, caterpillarPhoto, antPhoto, beePhoto);
 		bugs.setPadding(new Insets(30, 20, 10, 20));//top, right, bottom, left
-		Scene scene = new Scene(bugs, 540, ((30+10+100)*3));
+		
+		Text largeWords = new Text("Welcome! Get to know the bugs.");
+		largeWords.setFont(Font.font ("Sans", 35));
+		Text smallerWords = new Text("Click each bug button to see their info."
+		+"\nLook carefully, as this will be the only chance.");
+		smallerWords.setFont(Font.font ("Sans", 17.5));
+		
+		VBox words = new VBox(10, largeWords, smallerWords);
+		
+		borderPane.setCenter(words);
+		borderPane.setBottom(bugs);
+		
+		
+		Scene scene = new Scene(borderPane, 540, ((30+10+100)*3));
+		
+		
 		bugs.setAlignment(javafx.geometry.Pos.BOTTOM_CENTER);
+		words.setAlignment(javafx.geometry.Pos.CENTER);
       
 		// Add the Scene to the Stage.
 		primaryStage.setScene(scene);
@@ -100,12 +125,18 @@ public class journey extends Application{
 		primaryStage.show();
 	}
 	
-	class showWormInfo implements EventHandler<actionevent>{
+	class showWormInfo implements EventHandler<ActionEvent>{
 		@Override
 		public void handle(ActionEvent event){
 			
-			
 		}
 	}
+	/*
+		left off plan (3:39am):
+			- format abilities and read text from docs to set text
+			- make button press methods to set small text to info
+			- make enemy vectors
+			- think through other stage formats
+	*/
 	
 }
