@@ -9,4 +9,4 @@ This is a short sort of text adventure with 4 bugs.
 
 You will need to keep track of food, health, progress, and abilities
 
-Each bug will have 3 abilities you can use to solve the puzzles and defeat enemies
+Each bug will have 2 abilities you can use to solve the puzzles and defeat enemies
