@@ -1,0 +1,7 @@
+HP
+6
+ABILITIES
+eat
+silk
+HUNGER
+4

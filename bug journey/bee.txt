@@ -1,0 +1,7 @@
+HP
+8
+ABILITIES
+pollen
+dance
+HUNGER
+2

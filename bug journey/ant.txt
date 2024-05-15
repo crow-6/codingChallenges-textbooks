@@ -1,0 +1,7 @@
+HP
+8
+ABILITIES
+strength
+build
+HUNGER
+2

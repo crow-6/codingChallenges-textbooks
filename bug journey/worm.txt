@@ -1,0 +1,7 @@
+HP
+10
+ABILITIES
+enrich
+dig
+HUNGER
+1
