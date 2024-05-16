@@ -18,6 +18,7 @@
 
 //i actually hate bugs
 
+import java.io.*;
 import java.util.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -36,15 +37,26 @@ import javafx.geometry.Insets;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 
+
+
 /*layout plan: 4 bugs along bottom with vector sprites, constant*/
 
 public class journey extends Application{
+	public Text largeWords = new Text("Welcome! Get to know the bugs.");
+	public Text smallerWords = new Text("Click each bug button to see their info."
+		+"\nLook carefully, as this will be the only chance.");
+		
 	public static void main(String[] args){
 		launch(args);
 	}
 	
 	@Override
 	public void start(Stage primaryStage){
+		bug wormStats = new bug();
+		bug caterpillarStats = new bug();
+		bug antStats = new bug();
+		bug beeStats = new bug();
+		
 		//each picture is 100, 10 between each 20 on each side
 		//bottom section will have the photos with 100 height on each photo and 30 on top and 10 on bottom
 		
@@ -73,15 +85,21 @@ public class journey extends Application{
 		Button caterpillarPhoto = new Button();
 		caterpillarPhoto.setGraphic(viewCaterpillar);
 		
+		caterpillarPhoto.setOnAction(new showCaterpillarInfo());
+		
 		viewAnt.setFitWidth(100);
 		viewAnt.setPreserveRatio(true);
 		Button antPhoto = new Button();
 		antPhoto.setGraphic(viewAnt);
 		
+		antPhoto.setOnAction(new showAntInfo());
+		
 		viewBee.setFitWidth(100);
 		viewBee.setPreserveRatio(true);
 		Button beePhoto = new Button();
 		beePhoto.setGraphic(viewBee);
+		
+		beePhoto.setOnAction(new showBeeInfo());
 		
 		/*
 		left off plan (5:09am):
@@ -97,11 +115,10 @@ public class journey extends Application{
 		HBox bugs = new HBox(10, wormPhoto, caterpillarPhoto, antPhoto, beePhoto);
 		bugs.setPadding(new Insets(30, 20, 10, 20));//top, right, bottom, left
 		
-		Text largeWords = new Text("Welcome! Get to know the bugs.");
-		largeWords.setFont(Font.font ("Sans", 35));
-		Text smallerWords = new Text("Click each bug button to see their info."
-		+"\nLook carefully, as this will be the only chance.");
-		smallerWords.setFont(Font.font ("Sans", 17.5));
+		
+		largeWords.setFont(Font.font ("Comic Sans MS", 35));
+		
+		smallerWords.setFont(Font.font ("Comic Sans MS", 17.5));
 		
 		VBox words = new VBox(10, largeWords, smallerWords);
 		
@@ -123,12 +140,35 @@ public class journey extends Application{
 		
 		// Show the window.
 		primaryStage.show();
+		
+		
 	}
 	
 	class showWormInfo implements EventHandler<ActionEvent>{
 		@Override
 		public void handle(ActionEvent event){
-			
+			smallerWords.setText(displayInfo("files\\worm.txt", "worm"));
+		}
+	}
+	
+	class showBeeInfo implements EventHandler<ActionEvent>{
+		@Override
+		public void handle(ActionEvent event){
+			smallerWords.setText(displayInfo("files\\bee.txt", "bee"));
+		}
+	}
+	
+	class showCaterpillarInfo implements EventHandler<ActionEvent>{
+		@Override
+		public void handle(ActionEvent event){
+			smallerWords.setText(displayInfo("files\\caterpillar.txt", "caterpillar"));
+		}
+	}
+	
+	class showAntInfo implements EventHandler<ActionEvent>{
+		@Override
+		public void handle(ActionEvent event){
+			smallerWords.setText(displayInfo("files\\ant.txt", "ant"));
 		}
 	}
 	/*
@@ -138,5 +178,24 @@ public class journey extends Application{
 			- make enemy vectors
 			- think through other stage formats
 	*/
+	
+	public String displayInfo(String fileName, String name){
+		String[] lines = new String[7];
+		try{
+			File bugfile = new File(fileName);
+			Scanner inputFile = new Scanner(bugfile);
+			int i = 0;
+			while(inputFile.hasNext()){
+				lines[i] = inputFile.nextLine();
+				i++;
+			}
+		}catch (FileNotFoundException e){
+			System.out.println("it isn't working.");
+		}
+		
+		return("The " + name + " has " + lines[1] + " health points!\n" + 
+			"It has the abilities " + lines[3] + " and " + lines[4] + "\n" + 
+			"It needs " + lines[6] + " seeds per meal.");
+	}
 	
 }
