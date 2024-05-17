@@ -22,7 +22,7 @@ public class bug{
 	}
 
 	public void setInfo(String fileName){
-		String[] lines = {};
+		String[] lines = new String[7];
 		try{
 			File bugfile = new File(fileName);
 			Scanner inputFile = new Scanner(bugfile);
@@ -40,6 +40,11 @@ public class bug{
 		}catch (FileNotFoundException e){
 			System.out.println("it isn't working.");
 		}
+	}
+	
+	public String toString(){
+		return (this.HP +"\n"+this.abilities[0]+"\n"+this.abilities[1]+"\n"+this.hunger);
+		
 	}
 
 }
