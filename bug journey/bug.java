@@ -9,9 +9,9 @@ import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 
 public class bug{
-	private int HP = 0;
-	private String[] abilities = {"", ""};
-	private int hunger = 0;
+	public double HP = 0;
+	public String[] abilities = {"", ""};
+	public double hunger = 0;
 	
 	public bug(){
 		this.HP = 0;

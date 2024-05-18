@@ -7,11 +7,12 @@
 	- 4 bugs
 		~ bee, ant, caterpillar, and worm
 	- 6 stages
-		~ 3 food (budgeting due to growth)
-		~ 3 obstacles (success will determine how much food is won)
-		~ 3 riddles (success will determine whether food is won)
-		~ 2 enemies (non-bugs)
+		~ 4 food (budgeting due to growth)
+		~ 4 obstacles (success will determine how much food is won)
+		~ 4 riddles (success will determine whether food is won)
+		~ 4 enemies (non-bugs)
 		~ ending (party or other)
+		~ (riddle, obstacle, meal enemy)*4 + victory/loss(if it doesn't work out)
 + plan: have it be in a window and not command line
 + start date: may-14-2024-12:56am 
 */
@@ -22,9 +23,9 @@
 import java.io.*;
 import java.util.*;
 import javafx.application.Application;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.BorderPane;
@@ -40,6 +41,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.collections.ObservableList; 
 
 /*layout plan: 4 bugs along bottom with vector sprites, constant*/
@@ -86,6 +88,11 @@ public class journey extends Application{
 	public static Button caterpillarPhoto = new Button();
 	public static Button antPhoto = new Button();
 	public static Button beePhoto = new Button();
+	
+	public static int riddleIndex = -1;
+	
+	public static int seeds = 15;
+	public static boolean lost = false;
 	
 	@Override
 	public void start(Stage primaryStage){
@@ -147,6 +154,7 @@ public class journey extends Application{
 		smallerWords.setFont(Font.font ("Comic Sans MS", 17.5));
 		Color smallColor = Color.rgb(87, 153, 153);
 		smallerWords.setFill(smallColor);
+		smallerWords.setTextAlignment(TextAlignment.CENTER); 
 		
 		VBox words = new VBox(10, largeWords, smallerWords);
 		
@@ -275,6 +283,20 @@ public class journey extends Application{
 		}
 	}
 	
+	public static void win(){
+		seeds += 9;
+	}
+	
+	//bug is a class
+	public static void feed(bug theBug){
+		seeds -= theBug.hunger;
+		theBug.HP += (theBug.HP/theBug.hunger);
+	}
+	
+	public static void hit(bug theBug){
+		theBug.HP -= (theBug.HP)*0.2;
+	}
+	
 }
 
-//it feels cruel to make more scenes from scratch, so the riddles and enemies will be their own classes
+//it feels cruel to make more scenes from scratch in this file, so the riddles and enemies will be their own classes
