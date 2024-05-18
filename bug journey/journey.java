@@ -22,6 +22,7 @@
 import java.io.*;
 import java.util.*;
 import javafx.application.Application;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -37,6 +38,8 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.collections.ObservableList; 
 
 /*layout plan: 4 bugs along bottom with vector sprites, constant*/
@@ -61,19 +64,28 @@ public class journey extends Application{
 		launch(args);
 	}
 	
-	public Image worm = new Image("file:files\\worm.png");
-	public Image caterpillar = new Image("file:files\\caterpillar.png");
-	public Image ant = new Image("file:files\\ant.png");
-	public Image bee = new Image("file:files\\bee.png");
+	public static Image worm = new Image("file:files\\worm.png");
+	public static Image caterpillar = new Image("file:files\\caterpillar.png");
+	public static Image ant = new Image("file:files\\ant.png");
+	public static Image bee = new Image("file:files\\bee.png");
 	
-	public ImageView viewWorm = new ImageView(worm);
-	public ImageView viewCaterpillar = new ImageView(caterpillar);
-	public ImageView viewAnt = new ImageView(ant);
-	public ImageView viewBee = new ImageView(bee);
+	public static ImageView viewWorm = new ImageView(worm);
+	public static ImageView viewCaterpillar = new ImageView(caterpillar);
+	public static ImageView viewAnt = new ImageView(ant);
+	public static ImageView viewBee = new ImageView(bee);
 	
-	public HBox bugs = new HBox(10);
+	public static HBox bugs = new HBox(10);
 	
-	public Stage primaryStage = new Stage();
+	public static Stage primaryStage = new Stage();
+	
+	//use borderpane for layout
+	public static BorderPane borderPane = new BorderPane();
+	
+	
+	public static Button wormPhoto = new Button();
+	public static Button caterpillarPhoto = new Button();
+	public static Button antPhoto = new Button();
+	public static Button beePhoto = new Button();
 	
 	@Override
 	public void start(Stage primaryStage){
@@ -85,31 +97,27 @@ public class journey extends Application{
 		
 		viewWorm.setFitWidth(100);
 		viewWorm.setPreserveRatio(true);
-		Button wormPhoto = new Button();
 		wormPhoto.setGraphic(viewWorm);
-		
+		wormPhoto.setStyle("-fx-background-color: #ff000000");
 		//registering worm button to method
 		wormPhoto.setOnAction(new showWormInfo());
 		
 		viewCaterpillar.setFitWidth(100);
 		viewCaterpillar.setPreserveRatio(true);
-		Button caterpillarPhoto = new Button();
 		caterpillarPhoto.setGraphic(viewCaterpillar);
-		
+		caterpillarPhoto.setStyle("-fx-background-color: #ff000000");
 		caterpillarPhoto.setOnAction(new showCaterpillarInfo());
 		
 		viewAnt.setFitWidth(100);
 		viewAnt.setPreserveRatio(true);
-		Button antPhoto = new Button();
 		antPhoto.setGraphic(viewAnt);
-		
+		antPhoto.setStyle("-fx-background-color: #ff000000");
 		antPhoto.setOnAction(new showAntInfo());
 		
 		viewBee.setFitWidth(100);
 		viewBee.setPreserveRatio(true);
-		Button beePhoto = new Button();
 		beePhoto.setGraphic(viewBee);
-		
+		beePhoto.setStyle("-fx-background-color: #ff000000");
 		beePhoto.setOnAction(new showBeeInfo());
 		
 		/*
@@ -120,8 +128,9 @@ public class journey extends Application{
 				idea: have doc with abilities that reads
 		*/
 		
-		//use borderpane for layout
-		BorderPane borderPane = new BorderPane();
+		borderPane.setStyle("-fx-background-color: #91FFFF");
+		bugs.setStyle("-fx-background-color: #8D6236;");
+		
 
 		//retrieving the observable list of the bugs HBox 
 		ObservableList list = bugs.getChildren();  
@@ -129,11 +138,15 @@ public class journey extends Application{
 		//adding the buttons to the hbox
 		list.addAll(wormPhoto, caterpillarPhoto, antPhoto, beePhoto);     
 		
-		bugs.setPadding(new Insets(30, 20, 10, 20));//top, right, bottom, left
+		bugs.setPadding(new Insets(10, 20, 10, 20));//top, right, bottom, left
 		
-		largeWords.setFont(Font.font ("Comic Sans MS", 35));
-		
+		//everything will be in comic sans
+		largeWords.setFont(Font.font ("Comic Sans MS", FontWeight.BOLD, 30));
+		Color largeColor = Color.rgb(255, 195, 145);
+		largeWords.setFill(largeColor);
 		smallerWords.setFont(Font.font ("Comic Sans MS", 17.5));
+		Color smallColor = Color.rgb(87, 153, 153);
+		smallerWords.setFill(smallColor);
 		
 		VBox words = new VBox(10, largeWords, smallerWords);
 		
@@ -163,7 +176,7 @@ public class journey extends Application{
 			wormStats.setInfo("files\\worm.txt");
 			//System.out.println(wormStats.toString());
 			wormClick = true;
-			CheckAndChange(bugs,primaryStage);
+			CheckAndChange(smallerWords,bugs,primaryStage,borderPane);
 		}
 	}
 	
@@ -174,7 +187,7 @@ public class journey extends Application{
 			beeStats.setInfo("files\\bee.txt");
 			//System.out.println(beeStats.toString());
 			beeClick = true;
-			CheckAndChange(bugs,primaryStage);
+			CheckAndChange(smallerWords,bugs,primaryStage,borderPane);
 		}
 	}
 	
@@ -185,7 +198,7 @@ public class journey extends Application{
 			caterpillarStats.setInfo("files\\caterpillar.txt");
 			//System.out.println(caterpillarStats.toString());
 			caterpillarClick = true;
-			CheckAndChange(bugs,primaryStage);
+			CheckAndChange(smallerWords,bugs,primaryStage,borderPane);
 		}
 	}
 	
@@ -196,7 +209,18 @@ public class journey extends Application{
 			antStats.setInfo("files\\ant.txt");
 			//System.out.println(antStats.toString());
 			antClick = true;
-			CheckAndChange(bugs,primaryStage);
+			CheckAndChange(smallerWords,bugs,primaryStage,borderPane);
+		}
+	}
+	
+	class moveOn implements EventHandler<ActionEvent>{
+		@Override
+		public void handle(ActionEvent event){
+			riddle.start(primaryStage);
+			//close the window of the aspect being left behind
+			Stage stage = (Stage) smallerWords.getScene().getWindow();
+			// do what you have to do
+			stage.close();
 		}
 	}
 	
@@ -227,22 +251,30 @@ public class journey extends Application{
 			"It needs " + lines[6] + " seeds per meal.");
 	}
 	
-	public void CheckAndChange(HBox bugs, Stage theStage){
+	public void CheckAndChange(Text words, HBox bugs, Stage theStage, BorderPane pane){
 		/*
 		plan for this method:
 			- remove vbox
 			- but button in same place
 		*/
 		if((wormClick == true)&&(caterpillarClick == true)&&(antClick == true)&&(beeClick == true)){
-			BorderPane borderPane2 = new BorderPane();
-			borderPane2.setBottom(bugs);
+			pane.getChildren().removeAll();
 			Button startGame = new Button("Start Journey!");
-			VBox wordsAndButton = new VBox(10, startGame, smallerWords);
+			startGame.setMinHeight(35);
+			startGame.setMinWidth(200);
+			startGame.setFont(Font.font("Comic Sans MS", 30));
+			startGame.setTextFill(Color.web("#ffffff"));
+			startGame.setStyle("-fx-background-color: #FFC391");
+			startGame.setOnAction(new moveOn());
+			VBox wordsAndButton = new VBox(10, startGame, words);
+			pane.setBottom(bugs);
+			pane.setCenter(wordsAndButton);
+			wordsAndButton.setAlignment(javafx.geometry.Pos.CENTER);
+			
 			//note to self (may16) use css for next project
-			borderPane2.setCenter(wordsAndButton);
-			Scene scene2 = new Scene(borderPane2, 540, ((30+10+100)*3));
-			theStage.setScene(scene2);
 		}
 	}
 	
 }
+
+//it feels cruel to make more scenes from scratch, so the riddles and enemies will be their own classes
