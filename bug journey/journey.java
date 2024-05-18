@@ -12,7 +12,7 @@
 		~ 4 riddles (success will determine whether food is won)
 		~ 4 enemies (non-bugs)
 		~ ending (party or other)
-		~ (riddle, obstacle, meal enemy)*4 + victory/loss(if it doesn't work out)
+		~ (riddle, enemy, obstacle, meal)*4 + victory/loss(if it doesn't work out)
 + plan: have it be in a window and not command line
 + start date: may-14-2024-12:56am 
 */
@@ -227,7 +227,6 @@ public class journey extends Application{
 			riddle.start(primaryStage);
 			//close the window of the aspect being left behind
 			Stage stage = (Stage) smallerWords.getScene().getWindow();
-			// do what you have to do
 			stage.close();
 		}
 	}

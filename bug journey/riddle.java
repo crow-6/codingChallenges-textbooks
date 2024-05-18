@@ -35,6 +35,7 @@ public class riddle{
 	
 	public static String userAnswer = "";
 	
+	public static Stage primaryStage = new Stage();
 	
 	public static BorderPane riddleBorderPane = new BorderPane();
 	
@@ -144,6 +145,7 @@ public class riddle{
 		moveOn.setFont(Font.font("Comic Sans MS", 30));
 		moveOn.setTextFill(Color.web("#FFFFFF"));
 		moveOn.setStyle("-fx-background-color: #579999");
+		moveOn.setOnAction(new nextStage());
 		
 		VBox wordsAndButton = new VBox(10, largeWords, moveOn);
 		
@@ -158,5 +160,15 @@ public class riddle{
 		journey.caterpillarPhoto.setOnAction(null);
 		journey.antPhoto.setOnAction(null);
 		journey.beePhoto.setOnAction(null);
+	}
+	
+	public static class nextStage implements EventHandler<ActionEvent>{
+		@Override
+		public void handle(ActionEvent event){
+			enemy.start(primaryStage);
+			//close the window of the aspect being left behind
+			Stage stage = (Stage) riddleBorderPane.getScene().getWindow();
+			stage.close();
+		}
 	}
 }
