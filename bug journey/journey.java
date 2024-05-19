@@ -55,7 +55,7 @@ public class journey extends Application{
 	
 	public Text largeWords = new Text("Welcome! Get to know the bugs.");
 	public Text smallerWords = new Text("Click each bug button to see their info." +
-		"\nYou'll be able to see the info later on");
+		"\nYou'll be able to see the info later on during battle.");
 		
 	public bug wormStats = new bug();
 	public bug caterpillarStats = new bug();

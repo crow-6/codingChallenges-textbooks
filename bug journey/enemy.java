@@ -22,9 +22,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.collections.ObservableList; 
 
-
-
 public class enemy{
+	public static Image lizard = new Image("file:files\\lizard.png");
+	//what is the enemy of a bee, caterpillar, and ant
+	
+	
 	public static void start(Stage primaryStage){
 		System.out.println("small enemy spider");
 	}
