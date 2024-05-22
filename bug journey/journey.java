@@ -61,6 +61,10 @@ public class journey extends Application{
 	public bug caterpillarStats = new bug();
 	public bug antStats = new bug();
 	public bug beeStats = new bug();
+	
+	
+	
+	
 		
 	public static void main(String[] args){
 		launch(args);
@@ -90,6 +94,7 @@ public class journey extends Application{
 	public static Button beePhoto = new Button();
 	
 	public static int riddleIndex = -1;
+	public static int enemyIndex = -1;
 	
 	public static int seeds = 15;
 	public static boolean lost = false;

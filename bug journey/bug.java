@@ -1,4 +1,4 @@
-//bug superclass
+//bug class
 
 import java.io.*;
 import java.util.*;
@@ -32,13 +32,13 @@ public class bug{
 				i++;
 			}
 			
-			this.HP = Integer.parseInt(lines[1]);
+			this.HP = Double.parseDouble(lines[1]);
 			this.abilities[0] = lines[3];
 			this.abilities[1] = lines[4];
-			this.hunger = Integer.parseInt(lines[6]);
+			this.hunger = Double.parseDouble(lines[6]);
 			
 		}catch (FileNotFoundException e){
-			System.out.println("it isn't working.");
+			System.out.println("it isn't working.(bug)");
 		}
 	}
 	

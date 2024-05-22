@@ -1,0 +1,6 @@
+HP
+18
+ATTACK
+3
+POWERFUL AGAINST
+caterpillar
